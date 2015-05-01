@@ -4,6 +4,7 @@ namespace :show_model_errors do
   task :validate => :environment do
     options                = {}
     options[:models]       = ENV["MODELS"]
+    options[:email_to]     = ENV["EMAIL_TO"]
 
     ShowModelErrors::Runner.run(options)
   end

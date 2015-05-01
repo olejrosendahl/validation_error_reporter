@@ -3,17 +3,20 @@ require "spec_helper"
 describe ShowModelErrors::Runner do
 
   describe ".run(options = {})" do
-    include Mail::Matchers
 
-    before do
-      Mail::TestMailer.deliveries.clear
-      described_class.run(mail: true)
+    describe "with email options" do
+      include Mail::Matchers
+
+      before do
+        Mail::TestMailer.deliveries.clear
+        described_class.run(email_to: "ole.johnny.rosendahl@gmail.com")
+      end
+
+      it { should have_sent_email }
+      it { should have_sent_email.from("show-model-errors@example.com") }
+      it { should have_sent_email.to("ole.johnny.rosendahl@gmail.com") }
+      it { should have_sent_email.with_subject("ShowModelError: Report") }
     end
-
-    it { should have_sent_email }
-    it { should have_sent_email.from("show-model-errors@example.com") }
-    it { should have_sent_email.to("ole.johnny.rosendahl@gmail.com") }
-    it { should have_sent_email.with_subject("ShowModelError: Report") }
   end
 
   describe ".get_errors(models)" do

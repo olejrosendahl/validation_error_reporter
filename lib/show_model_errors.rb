@@ -35,9 +35,9 @@ module ShowModelErrors
         models = get_models(options[:models])
         formatted_text = format(get_errors(models))
 
-        if options[:mail] == true
+        unless options[:email_to] == nil
           Mail.deliver do
-            to "ole.johnny.rosendahl@gmail.com"
+            to options[:email_to]
             from "show-model-errors@example.com"
             subject "ShowModelError: Report"
             body formatted_text
