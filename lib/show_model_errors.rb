@@ -13,15 +13,32 @@ module ShowModelErrors
   class Runner
 
     class << self
-      def run(mail = false)
+
+      def get_models(models = nil)
+        existing_models = ActiveRecord::Base.descendants
+
+        return existing_models unless models.present?
+
+        models.split(',').collect do |class_name|
+          unless const_defined?(class_name) || existing_models.include?(class_name)
+            puts("Chosen model '#{class_name}' does not exist")
+            exit(1)
+          end
+
+          class_name.classify.constantize
+        end
+      end
+
+      def run(options = {})
         Rails.application.eager_load!
 
-        formatted_text = format(get_errors)
+        models = get_models(options[:models])
+        formatted_text = format(get_errors(models))
 
-        if mail == true
+        if options[:mail] == true
           Mail.deliver do
             to "ole.johnny.rosendahl@gmail.com"
-            from "show-model-erros@example.com"
+            from "show-model-errors@example.com"
             subject "ShowModelError: Report"
             body formatted_text
           end
@@ -30,9 +47,9 @@ module ShowModelErrors
         end
       end
 
-      def get_errors
+      def get_errors(models)
         errors = []
-        ActiveRecord::Base.descendants.collect do |model|
+        models.collect do |model|
           next unless ActiveRecord::Base.connection.table_exists? model.table_name
           model.all.collect do |row|
             unless row.valid?
