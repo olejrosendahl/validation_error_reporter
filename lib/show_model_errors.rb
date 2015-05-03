@@ -29,21 +29,38 @@ module ShowModelErrors
         end
       end
 
+      def validate_options!(options)
+        unless options[:print]
+          unless options[:email_to].present?
+            raise_argument_error "Missing required option 'mail_to'"
+          end
+          unless options[:email_from].present?
+            raise_argument_error "Missing required option 'mail_from'"
+          end
+        end
+      end
+
+      def raise_argument_error(message)
+        raise ArgumentError, message
+      end
+
       def run(options = {})
         Rails.application.eager_load!
+
+        validate_options!(options)
 
         models = get_models(options[:models])
         formatted_text = format(get_errors(models))
 
-        unless options[:email_to] == nil
+        if options[:print] == true
+          puts formatted_text
+        else
           Mail.deliver do
             to options[:email_to]
-            from "show-model-errors@example.com"
+            from options[:email_from]
             subject "ShowModelError: Report"
             body formatted_text
           end
-        else
-          puts formatted_text
         end
       end
 
