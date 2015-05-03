@@ -6,7 +6,7 @@ namespace :show_model_errors do
     options[:models]       = ENV["MODELS"]
     options[:email_to]     = ENV["EMAIL_TO"]
 
-    ShowModelErrors::Runner.run(options)
+    ShowModelErrors::Runner.new.run(options)
   end
 
 end
