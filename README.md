@@ -1,6 +1,9 @@
 # ValidationErrorReporter
 
-TODO: Write a gem description
+Data migrations and muliple changes in model validations sometimes leaves out
+required data leaving the models with errros. It's unfortunate that one should
+need such a tool, but here it is. Run the task periodically to ensure the data
+is intact.
 
 ## Installation
 
@@ -20,7 +23,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+The reports gets creates by a rake task. Printing or emailing the report is
+controlled by options sent through environment variables.
+
+To print the report, just run the task without any options:
+
+    $ bundle exec rake validation_error_report:validate
+
+To email the report set the `EMAIL_TO` and `EMAIL_FROM` options:
+
+    $ bundle exec rake validation_error_report EMAIL_TO=me@example.com
+    EMAIL_FROM=you@example.com
 
 ## Contributing
 
