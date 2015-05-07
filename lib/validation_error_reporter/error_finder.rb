@@ -1,4 +1,4 @@
-module ShowModelErrors
+module ValidationErrorReporter
   class ErrorFinder
 
     class << self

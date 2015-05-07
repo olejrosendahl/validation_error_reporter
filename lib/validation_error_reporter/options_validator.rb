@@ -1,4 +1,4 @@
-module ShowModelErrors
+module ValidationErrorReporter
   class OptionsValidator
 
     class << self

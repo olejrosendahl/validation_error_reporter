@@ -1,4 +1,4 @@
-module ShowModelErrors
+module ValidationErrorReporter
   class ModelResolver
     class << self
       def resolve(models = nil)

@@ -1,4 +1,4 @@
-require "show_model_errors"
+require "validation_error_reporter"
 require "byebug"
 require "database_cleaner"
 
@@ -6,7 +6,7 @@ Mail.defaults do
   delivery_method :test
 end
 
-class ShowModelErrorsApp < Rails::Application
+class ValidationErrorReporterApp < Rails::Application
 end
 
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")

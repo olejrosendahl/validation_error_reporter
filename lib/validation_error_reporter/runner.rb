@@ -1,11 +1,11 @@
-module ShowModelErrors
+module ValidationErrorReporter
   class Runner
     class << self
 
       def run(options = {})
         Rails.application.eager_load!
 
-        ShowModelErrors::OptionsValidator.validate!(options)
+        ValidationErrorReporter::OptionsValidator.validate!(options)
 
         models = get_models(options[:models])
         formatted_text = format(get_errors(models))

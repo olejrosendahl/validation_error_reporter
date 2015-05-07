@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ShowModelErrors::ErrorFinder do
+describe ValidationErrorReporter::ErrorFinder do
 
   describe ".get_errors(models)" do
     it "returns no errors on valid models" do

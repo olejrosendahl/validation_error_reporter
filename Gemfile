@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in show_model_errors.gemspec
+# Specify your gem's dependencies in validation_error_reporter.gemspec
 gemspec

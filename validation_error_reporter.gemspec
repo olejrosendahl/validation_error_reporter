@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'show_model_errors/version'
+require 'validation_error_reporter/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "show_model_errors"
-  spec.version       = ShowModelErrors::VERSION
+  spec.name          = "validation_error_reporter"
+  spec.version       = ValidationErrorReporter::VERSION
   spec.authors       = ["Ole J. Rosendahl"]
   spec.email         = ["ole.johnny.rosendahl@gmail.com"]
   spec.summary       = %q{Creates an error report from your ActiveRecord errors.}

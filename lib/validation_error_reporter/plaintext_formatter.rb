@@ -1,4 +1,4 @@
-module ShowModelErrors
+module ValidationErrorReporter
   class PlaintextFormatter
 
     class << self

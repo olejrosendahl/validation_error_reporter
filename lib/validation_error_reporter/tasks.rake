@@ -1,12 +1,12 @@
-namespace :show_model_errors do
+namespace :validation_error_reporter do
 
-  desc "Show errors on all models"
+  desc "Print or email validation error report"
   task :validate => :environment do
     options                = {}
     options[:models]       = ENV["MODELS"]
     options[:email_to]     = ENV["EMAIL_TO"]
 
-    ShowModelErrors::Runner.new.run(options)
+    ValidationErrorReporter::Runner.new.run(options)
   end
 
 end

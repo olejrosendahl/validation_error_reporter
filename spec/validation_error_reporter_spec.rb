@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ShowModelErrors::Runner do
+describe ValidationErrorReporter::Runner do
 
   describe ".run(options = {})" do
     include Mail::Matchers

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ShowModelErrors::PlaintextFormatter do
+describe ValidationErrorReporter::PlaintextFormatter do
 
   describe ".format" do
     it "formats the text for email" do

@@ -1,7 +1,7 @@
 require "spec_helper"
-require_relative "../../lib/show_model_errors/options_validator"
+require_relative "../../lib/validation_error_reporter/options_validator"
 
-describe ShowModelErrors::OptionsValidator do
+describe ValidationErrorReporter::OptionsValidator do
 
   describe ".validate!(options)" do
     it "throws errors for missing parameters" do
