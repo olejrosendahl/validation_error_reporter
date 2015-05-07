@@ -1,9 +1,10 @@
 # ValidationErrorReporter
 
-Data migrations and muliple changes in model validations sometimes leaves out
-required data leaving the models with errros. It's unfortunate that one should
-need such a tool, but here it is. Run the task periodically to ensure the data
-is intact.
+Data migrations and multiple changes in model validations over time sometimes leaves the models in an erroneous state.
+
+It's unfortunate that one would sometimes need such a tool, but here it is.
+
+Run the task periodically to ensure the data is intact.
 
 ## Installation
 
