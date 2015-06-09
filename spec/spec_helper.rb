@@ -1,5 +1,4 @@
 require "validation_error_reporter"
-require "byebug"
 require "database_cleaner"
 
 Mail.defaults do
