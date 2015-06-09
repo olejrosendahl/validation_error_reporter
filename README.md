@@ -29,12 +29,17 @@ controlled by options sent through environment variables.
 
 To print the report, just run the task without any options:
 
-    $ bundle exec rake validation_error_report:validate
+    $ bundle exec rake validation_error_reporter:validate
 
 To email the report set the `EMAIL_TO` and `EMAIL_FROM` options:
 
-    $ bundle exec rake validation_error_report EMAIL_TO=me@example.com
+    $ bundle exec rake validation_error_reporter:validate EMAIL_TO=me@example.com
     EMAIL_FROM=you@example.com
+
+If you only want to validate certain models specify which models you want to
+validate explicitly with the `MODELS` option:
+    # bundle exec rake validation_error_reporter:validate MODELS="Company,
+    Subscription"
 
 ## Contributing
 
