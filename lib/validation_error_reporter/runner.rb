@@ -42,26 +42,13 @@ module ValidationErrorReporter
 
     def get_errors(models)
       errors = []
-      queue = Queue.new
-      models.each {|model| queue.push(model) }
-      workers = (0...ActiveRecord::Base.connection.pool.size).map do
-        Thread.new do
-          begin
-            while model = queue.pop(true)
-              ActiveRecord::Base.connection_pool.with_connection do |conn|
-                model.all.find_each do |row|
-                  unless row.valid?
-                    errors << [model.model_name.human, row.public_send(model.primary_key), row.errors.full_messages]
-                  end
-                end
-              end
-            end
-          rescue ThreadError => e
-            puts e.message
+      models.each do |model|
+        model.all.find_each do |row|
+          unless row.valid?
+            errors << [model.model_name.human, row.public_send(model.primary_key), row.errors.full_messages]
           end
         end
       end
-      workers.map(&:join)
       errors
     end
 
