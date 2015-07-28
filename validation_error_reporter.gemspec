@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = ValidationErrorReporter::VERSION
   spec.authors       = ["Ole J. Rosendahl"]
   spec.email         = ["ole.johnny.rosendahl@gmail.com"]
-  spec.summary       = %q{Creates an error report from your ActiveRecord errors.}
+  spec.summary       = "Finds and reports ActiveRecord validation errors."
   spec.description   = spec.summary
   spec.homepage      = "https://github.com/olejrosendahl/validation_error_reporter"
   spec.license       = "MIT"

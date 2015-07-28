@@ -1,6 +1,6 @@
 # ValidationErrorReporter
 
-Data migrations and multiple changes in model validations over time sometimes leaves the models in an erroneous state.
+Data migrations and multiple changes in model validations over time sometimes leaves the models in an erroneous state and might cause problems if not deteced.
 
 It's unfortunate that one would sometimes need such a tool, but here it is.
 
@@ -36,8 +36,8 @@ To email the report set the `EMAIL_TO` and `EMAIL_FROM` options:
     $ bundle exec rake validation_error_reporter:validate EMAIL_TO=me@example.com
     EMAIL_FROM=you@example.com
 
-If you only want to validate certain models specify which models you want to
-validate explicitly with the `MODELS` option:
+If you want to validate specific models you can explicity say which
+models you want to validate with the `MODELS` option:
     # bundle exec rake validation_error_reporter:validate MODELS="Company,
     Subscription"
 
