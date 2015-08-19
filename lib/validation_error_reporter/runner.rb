@@ -26,15 +26,15 @@ module ValidationErrorReporter
 
       formatted_text = format(get_errors(@source_models))
 
-      if options[:print] == true
-        puts formatted_text
-      else
+      if options[:email_from] && options[:email_to]
         Mail.deliver do
           to options[:email_to]
           from options[:email_from]
           subject "ShowModelError: Report"
           body formatted_text
         end
+      else
+        puts formatted_text
       end
     end
 
@@ -53,7 +53,7 @@ module ValidationErrorReporter
     end
 
     def format(errors)
-      PlaintextFormatter.format(errors)
+      PlaintextFormatter.new(errors).format
     end
   end
 end
