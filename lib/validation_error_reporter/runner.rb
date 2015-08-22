@@ -1,5 +1,3 @@
-require "thread"
-
 module ValidationErrorReporter
   class Runner
 
@@ -13,7 +11,8 @@ module ValidationErrorReporter
             model_name.classify.constantize
           end
         end.reject do |model|
-          model.abstract_class? || !model.table_exists? ||  model.name.include?("HABTM_") || !model.public_methods.include?(:all)
+          !model.public_methods.include?(:all) || model.abstract_class? ||
+            !model.table_exists? ||  model.name.include?("HABTM_")
         end
       end
 
@@ -22,9 +21,9 @@ module ValidationErrorReporter
     def run(options = {})
       Rails.application.eager_load!
 
-      @source_models = Entity.from_models(options[:models])
+      models = Entity.from_models(options[:models])
 
-      report = ErrorReport.new(find_invalid_records(@source_models))
+      report = ErrorReport.new(find_invalid_records(models))
       formatted_text = format(report)
 
       if options[:email_from] && options[:email_to]

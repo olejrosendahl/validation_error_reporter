@@ -1,6 +1,5 @@
 module ValidationErrorReporter
   class PlaintextFormatter
-
     attr_accessor :report
 
     def initialize(report)
@@ -29,11 +28,7 @@ module ValidationErrorReporter
     end
 
     def number_of_errors
-      counter = 0
-      records.each do |record|
-        counter += record.errors.size
-      end
-      counter
+      records.sum { |r| r.errors.size }
     end
   end
 end

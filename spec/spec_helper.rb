@@ -13,25 +13,15 @@ ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":me
 
 ActiveRecord::Schema.verbose = false
 ActiveRecord::Schema.define do
-  create_table :banks do |t|
+  create_table :projects do |t|
     t.string :name
-  end
-
-  create_table :customers do |t|
-    t.string :name
-  end
-
-  create_table :cars do |t|
-    t.string :name
+    t.datetime :due
   end
 end
 
-class Bank < ActiveRecord::Base
+class Project < ActiveRecord::Base
   validates :name, presence: true, length: { minimum: 2 }
 end
-
-class Customer < ActiveRecord::Base; end
-class Car < ActiveRecord::Base; end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
