@@ -1,10 +1,10 @@
 module ValidationErrorReporter
   class PlaintextFormatter
 
-    attr_accessor :errors
+    attr_accessor :report
 
-    def initialize(errors)
-      @errors = errors
+    def initialize(report)
+      @report = report
     end
 
     def format
@@ -13,9 +13,14 @@ module ValidationErrorReporter
 
     private
 
+    def records
+      report.records
+    end
+
     def rows
-      errors.collect do |error|
-        "#{error[0]} #{error[1]}:\n" + error[2].map {|e| "  #{e}"}.join("\n")
+      report.records.collect do |record|
+        "#{record.class.model_name.human} #{record.public_send(record.class.primary_key)}:\n" +
+          record.errors.full_messages.map {|e| "  #{e}"}.join("\n")
       end.join("\n")
     end
 
@@ -25,8 +30,8 @@ module ValidationErrorReporter
 
     def number_of_errors
       counter = 0
-      errors.each do |error|
-        counter += error[2].size
+      records.each do |record|
+        counter += record.errors.size
       end
       counter
     end

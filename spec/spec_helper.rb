@@ -27,7 +27,7 @@ ActiveRecord::Schema.define do
 end
 
 class Bank < ActiveRecord::Base
-  validates :name, presence: true
+  validates :name, presence: true, length: { minimum: 2 }
 end
 
 class Customer < ActiveRecord::Base; end

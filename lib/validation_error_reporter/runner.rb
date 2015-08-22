@@ -24,7 +24,8 @@ module ValidationErrorReporter
 
       @source_models = Entity.from_models(options[:models])
 
-      formatted_text = format(get_errors(@source_models))
+      report = ErrorReport.new(find_invalid_records(@source_models))
+      formatted_text = format(report)
 
       if options[:email_from] && options[:email_to]
         Mail.deliver do
@@ -40,20 +41,16 @@ module ValidationErrorReporter
 
     private
 
-    def get_errors(models)
-      errors = []
+    def find_invalid_records(models)
+      invalid_records = []
       models.each do |model|
-        model.all.find_each do |row|
-          unless row.valid?
-            errors << [model.model_name.human, row.public_send(model.primary_key), row.errors.full_messages]
-          end
-        end
+        model.all.find_each { |record| invalid_records << record unless record.valid? }
       end
-      errors
+      invalid_records
     end
 
-    def format(errors)
-      PlaintextFormatter.new(errors).format
+    def format(report)
+      PlaintextFormatter.new(report).format
     end
   end
 end
