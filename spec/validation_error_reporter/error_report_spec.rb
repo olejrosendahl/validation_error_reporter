@@ -3,10 +3,10 @@ require "spec_helper"
 describe ValidationErrorReporter::ErrorReport do
 
   def create_record(name)
-    bank = Project.new(name: name)
-    bank.save(validate: false)
-    bank.valid?
-    bank
+    project = Project.new(name: name)
+    project.save(validate: false)
+    project.valid?
+    project
   end
 
   let(:records) { [create_record("F"), create_record("Second")] }

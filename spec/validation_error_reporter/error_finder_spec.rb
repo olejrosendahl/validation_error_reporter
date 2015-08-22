@@ -9,11 +9,11 @@ describe ValidationErrorReporter::ErrorFinder do
     end
 
     it "returns errors on invalid models" do
-      test_bank_2 = Project.new
-      test_bank_2.save(validate: false)
-      test_bank_2.valid?
-      expect(described_class.get_errors([Project])).to eq([[test_bank_2.class.model_name.human,
-                                 test_bank_2.id, test_bank_2.errors.full_messages]])
+      test_project_2 = Project.new
+      test_project_2.save(validate: false)
+      test_project_2.valid?
+      expect(described_class.get_errors([Project])).to eq([[test_project_2.class.model_name.human,
+                                 test_project_2.id, test_project_2.errors.full_messages]])
     end
   end
 end
