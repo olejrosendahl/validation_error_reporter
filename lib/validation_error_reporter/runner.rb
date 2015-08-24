@@ -22,9 +22,7 @@ module ValidationErrorReporter
       Rails.application.eager_load!
 
       models = Entity.from_models(options[:models])
-
-      report = ErrorReport.new(find_invalid_records(models))
-      formatted_text = format(report)
+      formatted_text = generate_report(find_invalid_records(models))
 
       if options[:email_from] && options[:email_to]
         Mail.deliver do
@@ -48,8 +46,8 @@ module ValidationErrorReporter
       invalid_records
     end
 
-    def format(report)
-      PlaintextFormatter.new(report).format
+    def generate_report(invalid_records)
+      ErrorReport.new(invalid_records, PlaintextFormatter.new).generate
     end
   end
 end

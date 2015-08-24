@@ -13,10 +13,18 @@ ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":me
 
 ActiveRecord::Schema.verbose = false
 ActiveRecord::Schema.define do
+  create_table :companies do |t|
+    t.string :name
+  end
+
   create_table :projects do |t|
     t.string :name
     t.datetime :due
   end
+end
+
+class Company < ActiveRecord::Base
+  validates :name, presence: true, length: { minimum: 2 }
 end
 
 class Project < ActiveRecord::Base
