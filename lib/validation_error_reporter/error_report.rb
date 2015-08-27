@@ -16,9 +16,9 @@ module ValidationErrorReporter
     def rows
       records.collect do |record|
         next if record.valid?
-
         collect_stats(record)
-        formatter.format_record(record)
+
+        notifications.add(format_record(record))
       end.compact.join("\n")
     end
 
@@ -35,8 +35,7 @@ module ValidationErrorReporter
     end
 
     def summary
-      return "" if lut.keys.length <= 1
-
+      return "" if lut.keys.length == 0
       "Summary:\n" + most_errors_text + "\n" + highest_error_rate_text
     end
 

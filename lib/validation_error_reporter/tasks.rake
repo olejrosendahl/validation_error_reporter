@@ -7,7 +7,7 @@ namespace :validation_error_reporter do
     options[:email_to]     = ENV["EMAIL_TO"]
     options[:email_from]   = ENV["EMAIL_FROM"]
 
-    ValidationErrorReporter::Runner.new.run(options)
+    ValidationErrorReporter::Runner.run(options)
   end
 
 end
