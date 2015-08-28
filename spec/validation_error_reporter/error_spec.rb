@@ -15,4 +15,10 @@ describe ValidationErrorReporter::Error do
       )
     end
   end
+
+  describe "#model_name" do
+  end
+
+  describe "#model_total_count" do
+  end
 end

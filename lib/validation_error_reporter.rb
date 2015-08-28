@@ -9,7 +9,9 @@ module ValidationErrorReporter
   autoload :Formatter, "validation_error_reporter/formatter"
   autoload :Reporter, "validation_error_reporter/reporter"
   autoload :Notifier, "validation_error_reporter/notifier"
+  autoload :Profiler, "validation_error_reporter/profiler"
   autoload :Error, "validation_error_reporter/error"
+  autoload :ProfileFormatter, "validation_error_reporter/profile_formatter"
 end
 
 Mail.defaults do
