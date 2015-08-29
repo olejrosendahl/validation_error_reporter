@@ -26,12 +26,11 @@ module ValidationErrorReporter
 
     def self.run_validations(models, reporter)
       models.each do |model|
-        errors = []
         model.find_each do |record|
-          errors << Error.new(record) unless record.valid?
+          reporter.report(Error.new(record)) unless record.valid?
         end
-        reporter.report(errors)
       end
+      reporter.finalize
     end
 
   end

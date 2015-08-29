@@ -11,15 +11,21 @@ describe ValidationErrorReporter::Reporter do
     end
   end
 
-  describe "#report(errors)" do
+  describe "#report(error)" do
     it "sends all the failed records to the notifiers" do
       error = double(:to_s)
 
       expect(error).to receive(:to_s).exactly(1).times
       expect_any_instance_of(ValidationErrorReporter::Notifiers::Console).to receive(:notify).exactly(1).times
-      expect_any_instance_of(ValidationErrorReporter::Notifiers::Console).to receive(:finalize).exactly(1).times
 
-      subject.report([error])
+      subject.report(error)
+    end
+  end
+
+  describe "#finalize" do
+    it "finalizes all notifiers" do
+      expect_any_instance_of(ValidationErrorReporter::Notifiers::Console).to receive(:finalize).exactly(1).times
+      subject.finalize
     end
   end
 
