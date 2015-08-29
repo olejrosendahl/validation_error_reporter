@@ -4,8 +4,8 @@ namespace :validation_error_reporter do
   task :validate => :environment do
     options                = {}
     options[:models]       = ENV["MODELS"].split(",") if ENV["MODELS"]
-    options[:email_to]     = ENV["EMAIL_TO"]
-    options[:email_from]   = ENV["EMAIL_FROM"]
+    options[:from]   = ENV["EMAIL_FROM"]
+    options[:to]     = ENV["EMAIL_TO"]
 
     ValidationErrorReporter::Runner.run(options)
   end

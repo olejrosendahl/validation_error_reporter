@@ -2,10 +2,9 @@ module ValidationErrorReporter
   class Reporter
     attr_reader :notifiers, :profiler
 
-    def initialize(profiler = false)
-      @notifiers = []
-      @notifiers << Notifier.new
-      @profiler = profiler ? Profiler.new : profiler
+    def initialize(configuration)
+      @notifiers = configuration.notifiers
+      @profiler = configuration.profiler if configuration.profiler
     end
 
     def report(errors)
@@ -19,6 +18,8 @@ module ValidationErrorReporter
         profile = profiler.profile(errors)
         notifiers.each { |notifier| notifier.notify(profile.to_s) }
       end
+
+      notifiers.each(&:finalize)
     end
 
   end

@@ -5,7 +5,8 @@ module ValidationErrorReporter
       Rails.application.eager_load!
       models = models_for(options[:models])
 
-      run_validations(models, Reporter.new)
+      configuration = Configuration.new(options)
+      run_validations(models, Reporter.new(configuration))
     end
 
     private
