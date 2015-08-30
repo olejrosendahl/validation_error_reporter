@@ -6,6 +6,7 @@ require "mail"
 
 require "validation_error_reporter/notifiers/console"
 require "validation_error_reporter/notifiers/email"
+require "validation_error_reporter/entity"
 
 module ValidationErrorReporter
   autoload :Runner, "validation_error_reporter/runner"
