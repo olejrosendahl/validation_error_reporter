@@ -1,3 +1,6 @@
+require "coveralls"
+Coveralls.wear!
+
 require "validation_error_reporter"
 require "database_cleaner"
 

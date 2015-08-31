@@ -1,11 +1,12 @@
 [travis]: https://travis-ci.org/olejrosendahl/validation_error_reporter
 [codeclimate]: https://codeclimate.com/github/olejrosendahl/validation_error_reporter
+[coveralls]: https://coveralls.io/r/blacktangent/validation_error_reporter
 
 # ValidationErrorReporter
 
 [![Build Status](https://travis-ci.org/olejrosendahl/validation_error_reporter.svg?branch=master)][travis]
 [![Code Climate](https://codeclimate.com/github/olejrosendahl/validation_error_reporter/badges/gpa.svg)][codeclimate]
-[![Test Coverage](https://codeclimate.com/github/olejrosendahl/validation_error_reporter/badges/coverage.svg)][codeclimate]
+[![Test Coverage](http://img.shields.io/coveralls/blacktangent/validation_error_reporter/master.svg)][coveralls]
 
 Data migrations and multiple changes in model validations over time sometimes leaves the models in an erroneous state and might cause problems if not deteced.
 
