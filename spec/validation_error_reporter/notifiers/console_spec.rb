@@ -5,8 +5,12 @@ describe ValidationErrorReporter::Notifiers::Console do
 
   describe "#notify" do
     it "sends its message to it's output" do
-      expect_any_instance_of(ValidationErrorReporter::Formatter).to receive(:output).with(:message)
-      subject.notify(:message)
+      printer = double
+      notifier = described_class.new(double, printer)
+
+      expect(printer).to receive(:puts).with(:message)
+
+      notifier.notify(:message)
     end
   end
 

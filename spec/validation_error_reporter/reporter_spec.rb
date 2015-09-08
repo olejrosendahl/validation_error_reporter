@@ -8,6 +8,7 @@ describe ValidationErrorReporter::Reporter do
   describe "initialize(configration)" do
     it "assigns notifiers from the configuration" do
       expect(subject.notifiers).to eq(configuration.notifiers)
+      expect(subject.profiler).to eq(configuration.profiler)
     end
   end
 
@@ -24,8 +25,15 @@ describe ValidationErrorReporter::Reporter do
 
   describe "#finalize" do
     it "finalizes all notifiers" do
-      expect_any_instance_of(ValidationErrorReporter::Notifiers::Console).to receive(:finalize).exactly(1).times
-      subject.finalize
+      notifier = double
+      configuration = ValidationErrorReporter::Configuration.new
+      configuration.notifiers = [notifier]
+
+      reporter = described_class.new(configuration)
+
+      expect(notifier).to receive(:notify).exactly(1).times
+      expect(notifier).to receive(:finalize).exactly(1).times
+      reporter.finalize
     end
   end
 

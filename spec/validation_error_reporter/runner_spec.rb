@@ -4,8 +4,10 @@ describe ValidationErrorReporter::Runner do
 
   describe "#run(options)" do
     it "validates all models" do
+      expect(ValidationErrorReporter::Entity).to receive(:models_for).with(nil)
+      expect(subject).to receive(:run_validations)
+
       subject.run
-      expect(subject.instance_exec { @models }).to eq([Company, Project])
     end
 
     context "when given models" do

@@ -1,13 +1,14 @@
 module ValidationErrorReporter
   module Notifiers
     class Console
+      attr_accessor :formatter, :printer
 
-      def initialize(configuration)
-        @formatter = Formatter.new
+      def initialize(configuration, printer = $stdout)
+        @formatter, @printer = Formatter.new, printer
       end
 
       def notify(message)
-        @formatter.output(message)
+        printer.puts @formatter.format(message)
       end
 
       def finalize

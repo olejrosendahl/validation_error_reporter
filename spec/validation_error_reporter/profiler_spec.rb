@@ -3,15 +3,17 @@ require "spec_helper"
 describe ValidationErrorReporter::Profiler do
 
   describe "#profile" do
-    it "outputs a string with stats" do
-      record = double(class: double(count: 2, model_name: double(name: "Project")))
-      error = ValidationErrorReporter::Error.new(record)
+    it "returns a hash with stats" do
+      error_1 = double(model_name: "Project", model_total_count: 4)
+      error_2 = double(model_name: "Project", model_total_count: 4)
 
-      expect(subject.profile([error])).to eq(
-        "Summary:\n" +
-        "Model with most errors: Project (2 entries, 1 errors, 50.0%).\n" +
-        "Model with highest error rate: Project (2 entries, 1 errors, 50.0%)."
-      )
+      expect(subject.profile([error_1, error_2])).to eq({
+        "Project" => {
+          count: 2,
+          total: 4,
+          rate: 50.0,
+        },
+      })
     end
   end
 

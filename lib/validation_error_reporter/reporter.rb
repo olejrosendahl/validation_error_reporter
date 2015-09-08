@@ -16,7 +16,8 @@ module ValidationErrorReporter
     def finalize
       if profiler
         profile = profiler.profile(errors)
-        notifiers.each { |notifier| notifier.notify(profile.to_s) }
+        formatter = ProfileFormatter.new
+        notifiers.each { |notifier| notifier.notify(formatter.format(profile)) }
       end
 
       notifiers.each(&:finalize)

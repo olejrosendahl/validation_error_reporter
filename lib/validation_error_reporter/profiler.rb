@@ -1,10 +1,8 @@
 module ValidationErrorReporter
   class Profiler
-    attr_reader :formatter
 
     def initialize
       @profile = Hash.new { |h, k| h[k] = { count: 0, total: 0 } }
-      @formatter = ProfileFormatter.new
     end
 
     def profile(errors)
@@ -17,7 +15,7 @@ module ValidationErrorReporter
         hash[:rate] = hash[:count].to_f / hash[:total].to_f * 100
       end
 
-      @formatter.output(@profile)
+      @profile
     end
 
   end

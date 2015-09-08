@@ -1,10 +1,12 @@
 module ValidationErrorReporter
   class ProfileFormatter < Formatter
 
-    def output(profile)
+    def format(profile)
+      return "No errors" if profile.empty?
+
       "Summary:\n" +
-      "Model with most errors: #{dump(profile, :rate)}.\n" +
-      "Model with highest error rate: #{dump(profile, :count)}."
+      "Model with most errors: #{dump(profile, :count)}.\n" +
+      "Model with highest error rate: #{dump(profile, :rate)}."
     end
 
     private

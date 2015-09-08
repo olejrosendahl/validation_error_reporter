@@ -10,6 +10,8 @@ module ValidationErrorReporter
       @notifiers = []
       @notifiers << Notifiers::Console.new(self)
       @notifiers << Notifiers::Email.new(self) if @to && @from
+
+      @profiler = Profiler.new
     end
   end
 
