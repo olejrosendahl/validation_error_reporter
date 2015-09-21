@@ -1,26 +1,26 @@
 require "spec_helper"
 
-describe ValidationErrorReporter::Runner do
+module ValidationErrorReporter
+  describe Runner do
 
-  describe "#run(options)" do
-    it "validates all models" do
-      expect(ValidationErrorReporter::Entity).to receive(:models_for).with(nil)
-      expect(subject).to receive(:run_validations)
-
-      subject.run
+    before do
+      company = Company.new
+      company.save(validate: false)
     end
 
-    context "when given models" do
-      subject { described_class.new(models: ["Company"]) }
-
-      it "validates the given models only" do
-        expect(ValidationErrorReporter::Entity).to receive(:models_for).with(["Company"])
-        expect(subject).to receive(:run_validations)
+    describe "#run(options)" do
+      it "fetches the models and processes the errors" do
+        expect(Entity).to receive(:models_for).with(nil).and_return([Company])
+        configuration = Configuration.new
+        expect(Configuration).to receive(:new).and_return(configuration)
+        reporter = Reporter.new(configuration)
+        expect(Reporter).to receive(:new).and_return(reporter)
+        expect(reporter).to receive(:report).exactly(1).times
+        expect(reporter).to receive(:finalize).exactly(1).times
 
         subject.run
       end
     end
 
   end
-
 end

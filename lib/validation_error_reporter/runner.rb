@@ -1,6 +1,6 @@
 module ValidationErrorReporter
   class Runner
-    attr_reader :options, :models
+    attr_reader :options
 
     def initialize(options = {})
       @options = options
@@ -8,15 +8,11 @@ module ValidationErrorReporter
 
     def run
       Rails.application.eager_load!
-      @models = Entity.models_for(options[:models])
 
+      models = Entity.models_for(options[:models])
       configuration = Configuration.new(options)
-      run_validations(models, Reporter.new(configuration))
-    end
+      reporter = Reporter.new(configuration)
 
-    private
-
-    def run_validations(models, reporter)
       models.each do |model|
         model.find_each do |record|
           reporter.report(Error.new(record)) unless record.valid?
