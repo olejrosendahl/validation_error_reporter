@@ -1,12 +1,14 @@
 [travis]: https://travis-ci.org/olejrosendahl/validation_error_reporter
 [codeclimate]: https://codeclimate.com/github/olejrosendahl/validation_error_reporter
 [coveralls]: https://coveralls.io/r/olejrosendahl/validation_error_reporter
+[rubygems]: https://rubygems.org/gems/validation_error_reporter
 
 # ValidationErrorReporter
 
 [![Build Status](https://travis-ci.org/olejrosendahl/validation_error_reporter.svg?branch=master)][travis]
 [![Code Climate](https://codeclimate.com/github/olejrosendahl/validation_error_reporter/badges/gpa.svg)][codeclimate]
 [![Test Coverage](http://img.shields.io/coveralls/olejrosendahl/validation_error_reporter/master.svg)][coveralls]
+[![Gem Version](http://img.shields.io/gem/v/validation_error_reporter.svg)][rubygems]
 
 Data migrations and multiple changes in model validations over time sometimes leaves the models in an erroneous state and might cause problems if not deteced.
 
