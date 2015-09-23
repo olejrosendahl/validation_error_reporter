@@ -10,6 +10,7 @@ module ValidationErrorReporter
 
     describe "#run(options)" do
       it "fetches the models and processes the errors" do
+        expect(Rails).to receive_message_chain(:application, :eager_load!)
         expect(Entity).to receive(:models_for).with(nil).and_return([Company])
         configuration = Configuration.new
         expect(Configuration).to receive(:new).and_return(configuration)
